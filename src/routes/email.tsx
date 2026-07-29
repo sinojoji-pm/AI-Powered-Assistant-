@@ -30,6 +30,7 @@ function EmailTool() {
         if (!recipient.trim() || !purpose.trim()) return null;
         return { recipient, purpose, tone };
       }}
+      activityTitle={() => `Email to ${recipient || "recipient"} · ${tone}`}
     >
       <Field label="Recipient">
         <input

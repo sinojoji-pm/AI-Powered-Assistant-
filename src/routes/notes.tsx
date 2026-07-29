@@ -24,6 +24,7 @@ function NotesTool() {
       description="Paste meeting notes to extract summary, decisions, action items, and deadlines."
       icon={<FileText className="h-7 w-7" />}
       buildPayload={() => (notes.trim() ? { notes } : null)}
+      activityTitle={() => `Meeting notes summary`}
     >
       <Field label="Meeting Notes">
         <textarea

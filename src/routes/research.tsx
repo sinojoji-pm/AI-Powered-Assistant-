@@ -24,6 +24,7 @@ function ResearchTool() {
       description="Enter a topic to receive a summary, key insights, and recommendations."
       icon={<Search className="h-7 w-7" />}
       buildPayload={() => (topic.trim() ? { topic } : null)}
+      activityTitle={() => `Research: ${topic.slice(0, 60) || "topic"}`}
     >
       <Field label="Research Topic">
         <textarea

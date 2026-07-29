@@ -24,6 +24,7 @@ function PlannerTool() {
       description="Enter today's tasks to get a prioritized schedule and productivity tips."
       icon={<CalendarClock className="h-7 w-7" />}
       buildPayload={() => (tasks.trim() ? { tasks } : null)}
+      activityTitle={() => `Daily plan`}
     >
       <Field label="Today's Tasks">
         <textarea
