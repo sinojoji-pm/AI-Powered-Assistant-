@@ -6,9 +6,9 @@ import { Field, ToolPage, inputCls } from "@/components/ToolPage";
 export const Route = createFileRoute("/planner")({
   head: () => ({
     meta: [
-      { title: "AI Task Planner · AI Productivity Assistant" },
-      { name: "description", content: "Build a prioritized schedule with AI-powered productivity tips." },
-      { property: "og:title", content: "AI Task Planner" },
+      { title: "Task Planner · Nexora AI" },
+      { name: "description", content: "Build a prioritized schedule with Nexora AI." },
+      { property: "og:title", content: "Nexora AI · Task Planner" },
       { property: "og:description", content: "Prioritize your day with AI." },
     ],
   }),

@@ -6,10 +6,10 @@ import { Field, ToolPage, inputCls } from "@/components/ToolPage";
 export const Route = createFileRoute("/email")({
   head: () => ({
     meta: [
-      { title: "Smart Email Generator · AI Productivity Assistant" },
-      { name: "description", content: "Generate professional emails in seconds with tone control." },
-      { property: "og:title", content: "Smart Email Generator" },
-      { property: "og:description", content: "Generate professional emails with AI." },
+      { title: "Email Generator · Nexora AI" },
+      { name: "description", content: "Generate professional emails in seconds with Nexora AI." },
+      { property: "og:title", content: "Nexora AI · Email Generator" },
+      { property: "og:description", content: "Craft polished emails with AI." },
     ],
   }),
   component: EmailTool,

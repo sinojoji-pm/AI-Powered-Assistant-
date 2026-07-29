@@ -12,6 +12,7 @@ import {
   TrendingUp,
   Lightbulb,
   Activity,
+  CheckCircle2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
@@ -20,44 +21,24 @@ import { loadActivity, loadStats, TOOL_META, type ActivityItem, type Stats } fro
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard · AI Productivity Assistant" },
+      { title: "Dashboard · Nexora AI" },
       {
         name: "description",
         content:
-          "Modern AI workspace: generate emails, summarize meetings, plan your day, and research topics — all in one dashboard.",
+          "Nexora AI dashboard: generate emails, summarize meetings, plan your day, and research topics in a futuristic AI workspace.",
       },
-      { property: "og:title", content: "AI Productivity Assistant" },
-      { property: "og:description", content: "Automate workplace tasks with a modern AI workspace." },
+      { property: "og:title", content: "Nexora AI · Dashboard" },
+      { property: "og:description", content: "Intelligence. Productivity. Elevated." },
     ],
   }),
   component: Dashboard,
 });
 
 const quickActions = [
-  {
-    href: "/email" as const,
-    icon: Mail,
-    title: "Smart Email",
-    desc: "Craft polished emails in seconds.",
-  },
-  {
-    href: "/notes" as const,
-    icon: FileText,
-    title: "Meeting Notes",
-    desc: "Extract actions from raw notes.",
-  },
-  {
-    href: "/planner" as const,
-    icon: CalendarClock,
-    title: "Task Planner",
-    desc: "Get a prioritized daily plan.",
-  },
-  {
-    href: "/research" as const,
-    icon: Search,
-    title: "Research",
-    desc: "Summaries and key insights.",
-  },
+  { href: "/email" as const, icon: Mail, title: "Email Generator", desc: "Craft polished emails in seconds." },
+  { href: "/notes" as const, icon: FileText, title: "Meeting Summaries", desc: "Extract actions from raw notes." },
+  { href: "/planner" as const, icon: CalendarClock, title: "Task Planner", desc: "Get a prioritized daily plan." },
+  { href: "/research" as const, icon: Search, title: "Research Assistant", desc: "Summaries and key insights." },
 ];
 
 const tips = [
@@ -65,6 +46,12 @@ const tips = [
   "Draft with AI, then refine with your own voice — you stay the author.",
   "Set 3 daily 'must-wins' before checking email or notifications.",
   "Use the Planner every morning for a 5-minute intention-setting ritual.",
+];
+
+const upcoming = [
+  { label: "Review quarterly OKRs", when: "Today · 2:00 PM" },
+  { label: "Design sync with product", when: "Tomorrow · 10:30 AM" },
+  { label: "Draft investor update", when: "Fri · 4:00 PM" },
 ];
 
 function timeAgo(ts: number) {
@@ -95,17 +82,17 @@ function Dashboard() {
     return () => window.removeEventListener("activity:updated", refresh);
   }, []);
 
-  const topTool =
-    (Object.entries(stats.byTool).sort((a, b) => b[1] - a[1])[0]?.[0] as keyof typeof TOOL_META) ||
-    "email";
+  const statCards = [
+    { label: "Emails Generated", value: stats.byTool.email, icon: Mail },
+    { label: "Meetings Summarized", value: stats.byTool.notes, icon: FileText },
+    { label: "Tasks Planned", value: stats.byTool.planner, icon: CalendarClock },
+    { label: "Research Queries", value: stats.byTool.research, icon: Search },
+  ];
 
   return (
     <AppShell>
       {/* Hero */}
-      <section
-        className="relative overflow-hidden"
-        style={{ background: "var(--gradient-hero)" }}
-      >
+      <section className="relative overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 animate-gradient"
@@ -113,52 +100,70 @@ function Dashboard() {
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-24 left-1/2 h-64 w-[120%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl"
+          className="pointer-events-none absolute -top-24 left-1/3 h-72 w-72 rounded-full bg-[color:var(--brand-purple)]/30 blur-3xl animate-float"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-0 right-10 h-64 w-64 rounded-full bg-[color:var(--brand-cyan)]/20 blur-3xl"
         />
         <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md">
-            <Sparkles className="h-3.5 w-3.5" /> Your AI workspace
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/90 backdrop-blur-md">
+            <Sparkles className="h-3.5 w-3.5 text-[color:var(--brand-cyan)]" />
+            Welcome back to Nexora
           </div>
-          <h1 className="max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Automate workplace tasks with Artificial Intelligence.
+          <h1 className="font-display max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Welcome back, <span className="text-gradient">Sinovuyo</span>.
           </h1>
-          <p className="mt-4 max-w-2xl text-sm text-white/80 sm:text-lg">
-            A modern AI Productivity Assistant — write emails, summarize meetings, plan your day, and research topics from one clean workspace.
+          <p className="mt-4 max-w-2xl text-sm text-white/70 sm:text-lg">
+            Your intelligent workspace is ready. Automate repetitive tasks, summarize meetings,
+            and make smarter decisions — powered by Nexora AI.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               to="/email"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-[color:var(--brand-blue)] shadow-[var(--shadow-elevated)] transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)]"
+              className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-[var(--shadow-elevated)] transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)]"
+              style={{ background: "var(--gradient-primary)" }}
             >
-              <Zap className="h-4 w-4" /> Get Started
+              <Zap className="h-4 w-4" /> Launch Assistant
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
             <a
-              href="#quick-actions"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
+              href="#overview"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white/90 backdrop-blur-md transition hover:bg-white/10"
             >
-              Explore Tools <ArrowRight className="h-4 w-4" />
+              Productivity Overview
             </a>
           </div>
 
-          {/* Stats cards - glassmorphism */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { label: "Tasks Automated", value: stats.total, icon: Zap },
-              { label: "Day Streak", value: stats.streakDays, icon: TrendingUp },
-              { label: "Most Used", value: TOOL_META[topTool].label, icon: Activity },
-              { label: "Time Saved", value: `${stats.total * 6}m`, icon: Clock },
-            ].map((s) => (
+          {/* Stat cards */}
+          <div id="overview" className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {statCards.map((s) => (
               <div
                 key={s.label}
-                className="glass-dark rounded-2xl p-5 text-white shadow-[var(--shadow-soft)]"
+                className="glass-dark group relative overflow-hidden rounded-2xl p-5 text-white shadow-[var(--shadow-soft)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-glow)]"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium uppercase tracking-wider text-white/70">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-2xl transition group-hover:opacity-50"
+                  style={{ background: "var(--gradient-primary)" }}
+                />
+                <div className="relative flex items-center justify-between">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60">
                     {s.label}
                   </span>
-                  <s.icon className="h-4 w-4 text-white/80" />
+                  <div
+                    className="grid h-8 w-8 place-items-center rounded-lg text-white"
+                    style={{ background: "var(--gradient-primary)" }}
+                  >
+                    <s.icon className="h-4 w-4" />
+                  </div>
                 </div>
-                <div className="mt-2 truncate text-2xl font-bold sm:text-3xl">{s.value}</div>
+                <div className="relative mt-3 font-display text-3xl font-bold tracking-tight">
+                  {s.value}
+                </div>
+                <div className="relative mt-1 flex items-center gap-1 text-[11px] text-white/60">
+                  <TrendingUp className="h-3 w-3" /> {stats.streakDays}-day streak
+                </div>
               </div>
             ))}
           </div>
@@ -166,12 +171,14 @@ function Dashboard() {
       </section>
 
       {/* Quick Actions */}
-      <section id="quick-actions" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Quick Actions</h2>
+            <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+              Quick Actions
+            </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Jump into any AI tool with one click.
+              Jump into any Nexora AI tool with one click.
             </p>
           </div>
         </div>
@@ -181,22 +188,24 @@ function Dashboard() {
             <Link
               key={f.href}
               to={f.href}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-elevated)]"
+              className="glass group relative overflow-hidden rounded-3xl p-6 transition duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]"
             >
               <div
                 aria-hidden
-                className="absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition duration-500 group-hover:opacity-40"
+                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition duration-500 group-hover:opacity-60"
                 style={{ background: "var(--gradient-primary)" }}
               />
               <div
-                className="mb-4 grid h-12 w-12 place-items-center rounded-2xl text-white shadow-[var(--shadow-soft)] transition group-hover:scale-110"
+                className="relative mb-4 grid h-12 w-12 place-items-center rounded-2xl text-white shadow-[var(--shadow-soft)] transition group-hover:scale-110"
                 style={{ background: "var(--gradient-primary)" }}
               >
                 <f.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-base font-semibold">{f.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{f.desc}</p>
-              <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--brand-purple)]">
+              <h3 className="relative font-display text-base font-semibold tracking-wide">
+                {f.title}
+              </h3>
+              <p className="relative mt-1 text-sm text-muted-foreground">{f.desc}</p>
+              <div className="relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--brand-cyan)]">
                 Open <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </div>
             </Link>
@@ -204,9 +213,9 @@ function Dashboard() {
         </div>
       </section>
 
-      {/* Activity + Tip */}
+      {/* Activity + Sidebar cards */}
       <section className="mx-auto grid max-w-6xl gap-5 px-4 pb-12 sm:px-6 lg:grid-cols-3">
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-soft)] lg:col-span-2">
+        <div className="glass rounded-3xl p-6 shadow-[var(--shadow-soft)] lg:col-span-2">
           <div className="mb-5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div
@@ -215,21 +224,28 @@ function Dashboard() {
               >
                 <Activity className="h-4 w-4" />
               </div>
-              <h3 className="text-lg font-semibold">Recent Activity</h3>
+              <h3 className="font-display text-lg font-semibold tracking-wide">Recent Activity</h3>
             </div>
+            <span className="text-xs text-muted-foreground">Live · {stats.total} total</span>
           </div>
           {activity.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-border bg-secondary/40 p-8 text-center">
+            <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-10 text-center">
+              <div
+                className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-2xl text-white animate-pulse-glow"
+                style={{ background: "var(--gradient-primary)" }}
+              >
+                <Sparkles className="h-5 w-5" />
+              </div>
               <p className="text-sm text-muted-foreground">
-                No activity yet — generate your first output to see it here.
+                No activity yet — generate your first output to light up your workspace.
               </p>
             </div>
           ) : (
-            <ul className="divide-y divide-border">
+            <ul className="divide-y divide-white/5">
               {activity.slice(0, 6).map((a) => (
                 <li key={a.id} className="flex items-center gap-4 py-3">
                   <div
-                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-white"
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-white shadow-[var(--shadow-soft)]"
                     style={{ background: "var(--gradient-primary)" }}
                   >
                     {a.tool === "email" && <Mail className="h-4 w-4" />}
@@ -242,6 +258,12 @@ function Dashboard() {
                     <div className="truncate text-xs text-muted-foreground">{a.preview}</div>
                   </div>
                   <div className="text-xs text-muted-foreground">{timeAgo(a.at)}</div>
+                  <Link
+                    to={TOOL_META[a.tool].path as "/email"}
+                    className="text-xs font-semibold text-[color:var(--brand-cyan)] hover:underline"
+                  >
+                    Open
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -255,43 +277,70 @@ function Dashboard() {
           >
             <div
               aria-hidden
-              className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/20 blur-2xl"
+              className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/25 blur-2xl"
             />
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur-md">
-              <Lightbulb className="h-3.5 w-3.5" /> Productivity Tip
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] backdrop-blur-md">
+              <Lightbulb className="h-3.5 w-3.5" /> AI Productivity Tip
             </div>
             <p className="text-base font-medium leading-relaxed">{tip}</p>
+            <div className="mt-4 flex items-center gap-1 text-xs text-white/80">
+              <Clock className="h-3.5 w-3.5" /> Est. time saved today · {stats.total * 6}m
+            </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-soft)]">
-            <div className="mb-3 flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-secondary text-[color:var(--brand-purple)]">
-                <ShieldAlert className="h-4 w-4" />
+          <div className="glass rounded-3xl p-6 shadow-[var(--shadow-soft)]">
+            <div className="mb-4 flex items-center gap-2">
+              <div
+                className="grid h-9 w-9 place-items-center rounded-xl text-white"
+                style={{ background: "var(--gradient-primary)" }}
+              >
+                <CalendarClock className="h-4 w-4" />
               </div>
-              <h3 className="text-base font-semibold">Responsible AI</h3>
+              <h3 className="font-display text-base font-semibold tracking-wide">Upcoming Tasks</h3>
             </div>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>• AI-generated responses may contain errors.</li>
-              <li>• Always verify important information.</li>
-              <li>• Avoid entering confidential business information.</li>
+            <ul className="space-y-3">
+              {upcoming.map((u) => (
+                <li key={u.label} className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--brand-cyan)]" />
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm font-medium">{u.label}</div>
+                    <div className="text-xs text-muted-foreground">{u.when}</div>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
+
+          <Link
+            to="/responsible-ai"
+            className="glass rounded-3xl p-6 shadow-[var(--shadow-soft)] transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow)]"
+          >
+            <div className="mb-3 flex items-center gap-2">
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 text-[color:var(--brand-cyan)]">
+                <ShieldAlert className="h-4 w-4" />
+              </div>
+              <h3 className="font-display text-base font-semibold tracking-wide">Responsible AI</h3>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Learn how Nexora keeps your workspace safe, private, and human-in-the-loop.
+            </p>
+            <div className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--brand-cyan)]">
+              Read guidelines <ArrowRight className="h-4 w-4" />
+            </div>
+          </Link>
         </div>
       </section>
 
-      <footer className="border-t border-border/60 bg-secondary/40">
+      <footer className="border-t border-white/10 bg-background/60 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-8 sm:flex-row sm:px-6">
           <div className="flex items-center gap-2">
-            <div
-              className="grid h-8 w-8 place-items-center rounded-lg text-white"
-              style={{ background: "var(--gradient-primary)" }}
-            >
-              <Sparkles className="h-4 w-4" />
-            </div>
-            <span className="text-sm font-semibold">AI Productivity Assistant</span>
+            <span className="font-display text-sm font-bold tracking-[0.25em] text-gradient">
+              NEXORA AI
+            </span>
           </div>
           <p className="text-xs text-muted-foreground">
-            Created by <span className="font-semibold text-foreground">Sinovuyo Joji</span> · Student Name · Powered by OpenAI
+            Created by <span className="font-semibold text-foreground">Sinovuyo Joji</span> ·
+            Student Name · Powered by OpenAI
           </p>
         </div>
       </footer>

@@ -6,9 +6,9 @@ import { Field, ToolPage, inputCls } from "@/components/ToolPage";
 export const Route = createFileRoute("/research")({
   head: () => ({
     meta: [
-      { title: "AI Research Assistant · AI Productivity Assistant" },
-      { name: "description", content: "Get summaries, key insights, and recommendations on any topic." },
-      { property: "og:title", content: "AI Research Assistant" },
+      { title: "Research Assistant · Nexora AI" },
+      { name: "description", content: "Get summaries, key insights, and recommendations on any topic with Nexora AI." },
+      { property: "og:title", content: "Nexora AI · Research Assistant" },
       { property: "og:description", content: "Research any topic with AI." },
     ],
   }),
