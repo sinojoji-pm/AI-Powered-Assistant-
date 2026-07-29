@@ -205,4 +205,4 @@ export function Field({ label, children }: { label: string; children: ReactNode 
 }
 
 export const inputCls =
-  "w-full rounded-xl border border-border bg-white/70 px-4 py-2.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/15";
+  "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary focus:bg-white/10 focus:ring-4 focus:ring-primary/20";

@@ -6,9 +6,9 @@ import { Field, ToolPage, inputCls } from "@/components/ToolPage";
 export const Route = createFileRoute("/notes")({
   head: () => ({
     meta: [
-      { title: "Meeting Notes Summarizer · AI Productivity Assistant" },
-      { name: "description", content: "Turn meeting notes into summaries, decisions, and action items." },
-      { property: "og:title", content: "Meeting Notes Summarizer" },
+      { title: "Meeting Summaries · Nexora AI" },
+      { name: "description", content: "Turn meeting notes into summaries, decisions, and action items with Nexora AI." },
+      { property: "og:title", content: "Nexora AI · Meeting Summaries" },
       { property: "og:description", content: "Summarize meetings with AI." },
     ],
   }),
