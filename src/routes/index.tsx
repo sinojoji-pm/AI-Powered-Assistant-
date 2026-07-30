@@ -27,8 +27,8 @@ export const Route = createFileRoute("/")({
         content:
           "Nexora AI dashboard: generate emails, summarize meetings, plan your day, and research topics in a futuristic AI workspace.",
       },
-      { property: "og:title", content: "Nexora AI · Dashboard" },
-      { property: "og:description", content: "Intelligence. Productivity. Elevated." },
+      { property: "og:title", content: "Dashboard · Nexora AI" },
+      { property: "og:description", content: "Nexora AI dashboard: generate emails, summarize meetings, plan your day, and research topics in a futuristic AI workspace." },
     ],
   }),
   component: Dashboard,

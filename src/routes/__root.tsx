@@ -77,17 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nexora AI · Intelligence. Productivity. Elevated." },
+      { title: "Dashboard · Nexora AI" },
       {
         name: "description",
         content:
-          "Nexora AI is an intelligent workplace assistant that automates repetitive tasks and elevates productivity with Artificial Intelligence.",
+          "Nexora AI dashboard: generate emails, summarize meetings, plan your day, and research topics in a futuristic AI workspace.",
       },
       { name: "author", content: "Nexora AI" },
-      { property: "og:title", content: "Nexora AI" },
-      { property: "og:description", content: "Intelligence. Productivity. Elevated." },
+      { property: "og:title", content: "Dashboard · Nexora AI" },
+      { property: "og:description", content: "Nexora AI dashboard: generate emails, summarize meetings, plan your day, and research topics in a futuristic AI workspace." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Dashboard · Nexora AI" },
+      { name: "twitter:description", content: "Nexora AI dashboard: generate emails, summarize meetings, plan your day, and research topics in a futuristic AI workspace." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/32e4fe61-bc0e-406d-8e2e-4e05c3d2c058/id-preview-4ded53c8--741c897a-88df-40e9-8c41-83f521403893.lovable.app-1785331564492.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/32e4fe61-bc0e-406d-8e2e-4e05c3d2c058/id-preview-4ded53c8--741c897a-88df-40e9-8c41-83f521403893.lovable.app-1785331564492.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
