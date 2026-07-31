@@ -1,4 +1,4 @@
-# Nexora AI — AI Productivity Assistant
+# AI Productivity Assistant
 
 A modern, premium AI-powered productivity workspace that helps automate everyday workplace tasks. Built with a futuristic sci-fi aesthetic, Nexora AI combines a clean dashboard with four intelligent generators to help you write emails, summarize meetings, plan tasks, and research topics faster.
 
