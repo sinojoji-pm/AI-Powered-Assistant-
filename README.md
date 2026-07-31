@@ -1,4 +1,4 @@
-# AI Assistant Hub
+# AI Powered Assistant
 
 Create a modern AI Productivity Assistant web application.
 
